@@ -4,7 +4,9 @@ import PropTypes from 'prop-types'
 import logo from '../images/logo.png'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
-
+//redux
+import { connect } from 'react-redux'
+import { loginUser } from '../redux/actions/userActions'
 //MUI imports
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
@@ -22,34 +24,22 @@ class login extends Component {
         this.state={
             email:'',
             password:'',
-            loading:false,
             errors:{}
         }
     }
+    componentWillReceiveProps(nextProps){
+        if(nextProps.ui.errors)
+        this.setState({
+            errors:nextProps.ui.errors
+        })
+    }
     handleSubmit = (event)=>{
         event.preventDefault()
-        this.setState({
-            loading:true
-        })
         const userData = {
             email:this.state.email,
             password:this.state.password
         }
-        axios.post('/login',userData)
-            .then(res => {
-                console.log(res.data)
-                localStorage.setItem('FBIdToken',`Bearer ${res.data.token}`)
-                this.setState({
-                    loading:false
-                })
-                this.props.history.push('/')
-            })
-            .catch(err=>{
-                this.setState({
-                    errors:err.response.data,
-                    loading:false
-                })
-            })        
+        this.props.loginUser(userData,this.props.history)           
     }
     handleChange = (event)=>{
         this.setState({
@@ -57,8 +47,8 @@ class login extends Component {
         })
     }
     render() {
-        const { classes } = this.props
-        const { errors , loading } = this.state
+        const { classes , ui:{ loading }} = this.props
+        const { errors } = this.state
         return (
             <Grid container className={classes.form}>
                 <Grid item sm/>
@@ -111,7 +101,17 @@ class login extends Component {
 }
 
 login.propTypes = {
-    classes:PropTypes.object.isRequired
+    classes:PropTypes.object.isRequired,
+    loginUser:PropTypes.func.isRequired,
+    user:PropTypes.object.isRequired,
+    ui:PropTypes.object.isRequired
+}
+const mapStateToProps = (state) => ({
+    user:state.user,
+    ui:state.ui
+})
+const mapActionsToProps = {
+    loginUser
 }
 
-export default withStyles(styles)(login)
+export default connect(mapStateToProps,mapActionsToProps)(withStyles(styles)(login))
