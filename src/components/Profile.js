@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
 import dayjs from 'dayjs'
+import EditDetails from './EditDetails'
 //mui
 import Button from '@material-ui/core/Button'
 import MuiLink from '@material-ui/core/Link'
@@ -113,7 +114,7 @@ class Profile extends Component {
                         { website && (
                             <Fragment>
                                 <LinkIcon color="primary" />
-                                <a href={website} targe="_blank" rel="noopener noreferrer">
+                                <a href={website} target="_blank" rel="noopener noreferrer">
                                     {' '}{website}
                                 </a>
                                 <hr/>
@@ -122,6 +123,7 @@ class Profile extends Component {
                         <CalendarToday color="primary"/>{' '}
                         <span>Joined {dayjs(createdAt).format('MMM YYYYY')}</span>
                     </div>
+                    <EditDetails />
                 </div>
             </Paper>
         ) : (
