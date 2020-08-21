@@ -8,9 +8,7 @@ const db = require('@/sequelize').db
 
 
 module.exports.initPassport = function (app) {
-
   app.use(passport.initialize());
-
   passport.use('jwt', new JWTStrategy({
     jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
     secretOrKey: process.env.JWT_SECRET

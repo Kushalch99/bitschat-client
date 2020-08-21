@@ -12,13 +12,17 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
   res.json({ message: 'server running sucessfully' })
 })
+
 const passportAuth = require('@/controller/authentication/passport_auth');
-passportAuth.initPassport(app);
+passportAuth.initPassport(app)
+
+require('./routes/auth')(app, passportAuth)
+
 app.get('/api/users', (req, res) => {
   console.log('API to get users called')
   User.findAll().then((users) => res.json(users))
 })
-console.log(process.env.PORT)
+
 app.listen(process.env.PORT, function () {
   console.log('Example app listening on port: ' + process.env.PORT)
 })
