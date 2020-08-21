@@ -12,8 +12,8 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
   res.json({ message: 'server running sucessfully' })
 })
-// const passportAuth = require('@/controller/authentication/passport_auth');
-// passportAuth.initPassport(app);
+const passportAuth = require('@/controller/authentication/passport_auth');
+passportAuth.initPassport(app);
 app.get('/api/users', (req, res) => {
   console.log('API to get users called')
   User.findAll().then((users) => res.json(users))
