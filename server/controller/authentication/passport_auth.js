@@ -62,9 +62,6 @@ module.exports.initPassport = function (app) {
           // Password doesn't match
           return done(null, false, { message: 'Incorrect email or password' })
         }
-        if (user.isVerified != 1) {
-            return done(null, false, { resend_email: true, message: 'Email is not Verified' })
-        }
         // Successful login
         done(null, { id: user.id, email: user.email, imageUrl: user.imageUrl });
       }

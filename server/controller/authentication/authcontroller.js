@@ -4,6 +4,7 @@ const { body } = require('express-validator/check')
 const db = require('@/sequelize').db
 const { check, validationResult } = require('express-validator')
 const Op = require('sequelize').Op
+const jwt = require('jsonwebtoken');
 
 const errorFormatter = ({ location, msg, param, value, nestedErrors }) => {
   // Build your resulting errors however you want! String, object, whatever - it works!
@@ -51,4 +52,32 @@ async function registerUser (req, res, roleId, UserTypeModel) {
     console.log(err)
     return res.status(400).json({ success: false })
   }
+}
+
+exports.login = function (req, res, next) {
+  passport.authenticate('local', { session: false }, (err, user, info) => {
+    // Decide what to do on authentication
+    console.log(user)
+    if (err || !user) {
+      return res.status(400).json(info);
+    }
+
+    req.login(user, { session: false }, err => {
+      if (err) {
+        res.status(400).send({ err });
+      }
+      var payload = {
+        id: user.id,
+        email: user.email,
+        handle: user.handle
+      }
+      const token = jwt.sign(payload, process.env.JWT_SECRET);
+      return res.json({ user, token });
+    });
+
+  })(req, res, next);
+}
+exports.logout = function (req, res) {
+  req.logout();
+  return res.send();
 }
