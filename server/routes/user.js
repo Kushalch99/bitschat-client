@@ -1,15 +1,16 @@
 var userController = require('@/controller/usercontroller')
 const passport = require('passport')
 
-module.exports = function (app) {
+module.exports = function (app, multer) {
   
   app.post('/api/user',
   passport.authenticate("jwt", { session: false }),
   userController.editUserDetails)
   
-  // app.post('/user/image',
-  // passport.authenticate("jwt", { session: false }),
-  // userController.uploadProfileImage)
+  app.post('/api/user/image',
+  passport.authenticate("jwt", { session: false }),
+  multer.single('file'),
+  userController.uploadProfileImage)
     
   app.get('/api/user/me',
   passport.authenticate("jwt", { session: false }),
