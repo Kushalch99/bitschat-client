@@ -16,7 +16,8 @@ app.get('/', (req, res) => {
 const passportAuth = require('@/controller/authentication/passport_auth');
 passportAuth.initPassport(app)
 
-require('./routes/auth')(app, passportAuth)
+require('./routes/auth')(app)
+require('./routes/user')(app)
 
 app.get('/api/users', (req, res) => {
   console.log('API to get users called')

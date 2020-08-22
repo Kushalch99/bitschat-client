@@ -27,22 +27,23 @@ exports.signup = [
         [Op.or]: [ {email: req.body.email}, {handle: req.body.handle} ]
       }
     })
-    // console.log(user)
     if(user == null)
       return registerUser(req, res)
-    else
+    else{
+      console.log('User already registered')
       return res.status(500).json({success: false, message: 'User already registered with given email or handle'})
+    }
   }
 ]
 
-async function registerUser (req, res, roleId, UserTypeModel) {
+async function registerUser (req, res) {
   console.log(req.body)
   let passwordHash = db.User.generateHash(req.body.password)
   const newUser = {
     email: req.body.email,
     password: passwordHash,
     handle:req.body.handle,
-    imageUrl: defaultImageUrl,
+    profileImageUrl: defaultImageUrl,
     isVerified: 1
   }
   try {

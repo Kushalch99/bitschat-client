@@ -63,7 +63,7 @@ module.exports.initPassport = function (app) {
           return done(null, false, { message: 'Incorrect email or password' })
         }
         // Successful login
-        done(null, { id: user.id, email: user.email, imageUrl: user.imageUrl });
+        done(null, { id: user.id, email: user.email, handle: user.handle });
       }
     )
   )
