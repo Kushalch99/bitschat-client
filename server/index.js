@@ -25,6 +25,7 @@ passportAuth.initPassport(app)
 
 require('./routes/auth')(app)
 require('./routes/user')(app, multer)
+require('./routes/scream')(app)
 
 app.get('/api/users', (req, res) => {
   console.log('API to get users called')
