@@ -20,4 +20,16 @@ module.exports = function (app) {
   passport.authenticate("jwt", { session: false }),
   screamController.postScream)
   
+  app.post('/api/:screamId/like',
+  passport.authenticate("jwt", { session: false }),
+  screamController.likeScream)
+  
+  app.post('/api/:screamId/unlike',
+  passport.authenticate("jwt", { session: false }),
+  screamController.unlikeScream)
+    
+  app.post('/api/:screamId/comment',
+  passport.authenticate("jwt", { session: false }),
+  screamController.postComment)
+  
 }

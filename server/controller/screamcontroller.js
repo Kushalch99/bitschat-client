@@ -133,3 +133,45 @@ exports.postScream = [
     }
   }
 ]
+
+exports.likeScream = async function (req, res) {
+  try{
+    await db.Like.create({
+      screamId: req.params.screamId,
+      userId: req.user.id
+    })
+    return res.status(200).json({success: true, message: 'Scream liked successfully'})
+  }catch (err) {
+    console.log(err)
+    return res.status(500).json({success: false, message: 'Error liking scream'})
+  }
+}
+
+exports.unlikeScream = async function (req, res) {
+  try{
+    await db.Like.destroy({
+      where: {
+        screamId: req.params.screamId,
+        userId: req.user.id
+      }
+    })
+    return res.status(200).json({success: true, message: 'Scream unliked successfully'})
+  }catch (err) {
+    console.log(err)
+    return res.status(500).json({success: false, message: 'Error unliking scream'})
+  }
+}
+
+exports.postComment = async function (req, res) {
+  try{
+    await db.Comment.create({
+      body: req.body.body,
+      screamId: req.params.screamId,
+      userId: req.user.id
+    })
+    return res.status(200).json({success: true, message: 'Comment posted successfully'})
+  }catch (err) {
+    console.log(err)
+    return res.status(500).json({success: false, message: 'Error commenting on scream'})
+  }
+}
