@@ -40,5 +40,5 @@
       "last 1 safari version"
     ]
   },
-  "proxy": "https://us-central1-bitschat-29b15.cloudfunctions.net/api"
+  "proxy": "http://localhost:3003/api"
 }

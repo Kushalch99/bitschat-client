@@ -84,7 +84,7 @@ class Profile extends Component {
         this.props.uploadImage(formData)
     }
     render() {
-        const { classes , user: { credentials: { handle, createdAt, imageUrl, bio, website, location } , authenticated, loading } } = this.props
+        const { classes , user: { userDetails: { handle, createdAt, imageUrl, bio } , authenticated, loading } } = this.props
         let profileMarkup = !loading ? ( authenticated ? (
             <Paper className = {classes.paper}>
                 <div className={classes.profile}>
@@ -105,7 +105,7 @@ class Profile extends Component {
                         <hr/>
                         {bio && <Typography variant="body">{bio}</Typography>}
                         <hr/>
-                        { location && (
+                        {/* { location && (
                             <Fragment>
                                 <LocationOn color="primary"/> <span>{location}</span>
                                 <hr/>
@@ -119,7 +119,7 @@ class Profile extends Component {
                                 </a>
                                 <hr/>
                             </Fragment>
-                        )}
+                        )} */}
                         <CalendarToday color="primary"/>{' '}
                         <span>Joined {dayjs(createdAt).format('MMM YYYYY')}</span>
                     </div>

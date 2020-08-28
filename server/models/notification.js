@@ -1,3 +1,4 @@
+const notificationController = require('@/controller/notificationcontroller.js')
 module.exports = (sequelize, type) => {
   var Notification = sequelize.define('notification', {
     id: {

@@ -37,8 +37,8 @@ class EditDetails extends Component {
     }
 
     componentDidMount(){
-        const { credentials } = this.props
-        this.setUserDetails(credentials)
+        const { userDetails } = this.props
+        this.setUserDetails(userDetails)
     }
 
     handleChange = (event)=>{
@@ -51,7 +51,7 @@ class EditDetails extends Component {
         this.setState({
             open: true
         })
-        this.setUserDetails(this.props.credentials)
+        this.setUserDetails(this.props.userDetails)
     }
 
     handleClose = () => {
@@ -70,11 +70,11 @@ class EditDetails extends Component {
         this.handleClose()
     }
 
-    setUserDetails = (credentials) => {
+    setUserDetails = (userDetails) => {
         this.setState({
-            bio: credentials.bio ? credentials.bio : '',
-            website: credentials.website ? credentials.website : '',
-            location: credentials.location ? credentials.location : '',
+            bio: userDetails.bio ? userDetails.bio : '',
+            website: userDetails.website ? userDetails.website : '',
+            location: userDetails.location ? userDetails.location : '',
         })
     }
     render() {
@@ -143,7 +143,7 @@ EditDetails.propTypes = {
 }
 
 const mapStateToProps = (store) => ({
-    credentials: store.user.credentials
+    userDetails: store.user.userDetails
 })
 
 export default connect(mapStateToProps, { editUserDetails })(withStyles(styles)(EditDetails))

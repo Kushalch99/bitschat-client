@@ -35,7 +35,7 @@ exports.getMyDetails = async function (req, res) {
   try{
     var userDetails = await db.User.findOne({
       where: {id: req.user.id},
-      attributes: ['email', 'handle', 'bio', 'profileImageUrl']
+      attributes: ['email', 'handle', 'bio', 'profileImageUrl', 'createdAt']
     })
     return res.status(200).json(userDetails)
   }catch(err) {

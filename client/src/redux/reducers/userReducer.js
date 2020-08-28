@@ -3,9 +3,8 @@ import { SET_USER, SET_AUTHENTICATED, SET_UNAUTHENTICATED, LOADING_USER } from '
 const initialState = {
     authenticated:false,
     loading: false,
-    credentials:{},
-    likes:[],
-    notifications:[]
+    userDetails:{},
+    // notifications:[]
 }
 
 export default function(state=initialState,action){
@@ -21,7 +20,13 @@ export default function(state=initialState,action){
             return {
                 authenticated: true,
                 loading: false,
-                ...action.payload
+                userDetails: {
+                    email: action.payload.email,
+                    handle: action.payload.handle,
+                    bio: action.payload.bio,
+                    imageUrl: action.payload.profileImageUrl,
+                    createdAt: action.payload.createdAt
+                }
             }
         case LOADING_USER:
             return {

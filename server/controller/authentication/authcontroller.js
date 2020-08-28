@@ -73,7 +73,8 @@ exports.login = function (req, res, next) {
         handle: user.handle
       }
       const token = jwt.sign(payload, process.env.JWT_SECRET);
-      return res.json({ user, token });
+      console.log({payload,token})
+      return res.status(200).json({ payload, token });
     });
 
   })(req, res, next);
