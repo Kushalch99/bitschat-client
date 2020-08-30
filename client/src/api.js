@@ -1,19 +1,20 @@
 import axios from 'axios'
 
 export const login = async function (userData) {
-  var res =  await axios.post('/login',userData)
-  // console.log("api call ",res)
-  return res
+  return await axios.post('/login', userData)
 }
 export const signup = async function (newUserData) {
-  var res = await axios.post('/signup',newUserData)
-  return res
+  return await axios.post('/signup', newUserData)
 }
 
 export const getMyDetails = async function () {
-  var res = await axios.get('user/me')
-  console.log("api get user",res)
-  return res
+  return await axios.get('/user/me')
 }
 
-// module.exports = { login, signup }
+export const updateMyDetails = async function (userDetails) {
+  return await axios.post('/user', userDetails)
+}
+
+export const uploadProfileImage = async function (image) {
+  return await axios.post('/user/image', image)
+}

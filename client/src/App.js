@@ -19,8 +19,7 @@ import signup from './pages/signup'
 import axios from 'axios'
 
 const theme = createMuiTheme(styles)
-let authenticated;
-const token = localStorage.FBIdToken
+const token = localStorage.AccessToken
 if(token){
   const decodedToken = jwtDecode(token)
   if(decodedToken.exp * 1000 < Date.now()){
