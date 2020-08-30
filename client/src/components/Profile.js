@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 import { Link } from 'react-router-dom'
@@ -13,15 +13,12 @@ import IconButton from '@material-ui/core/IconButton'
 import ToolTip from '@material-ui/core/Tooltip'
 
 //icons
-import LocationOn from '@material-ui/icons/LocationOn'
-import LinkIcon from '@material-ui/icons/Link'
 import CalendarToday from '@material-ui/icons/CalendarToday'
 import EditIcon from '@material-ui/icons/Edit'
 
 //redux
 import { connect } from 'react-redux'
 import { logoutUser, uploadImage } from '../redux/actions/userActions'
-import theme from '../utils/theme'
 
 const styles = (theme) => ({
   paper: {
@@ -122,21 +119,6 @@ class Profile extends Component {
               <hr />
               {bio && <Typography variant="body">{bio}</Typography>}
               <hr />
-              {/* { location && (
-                            <Fragment>
-                                <LocationOn color="primary"/> <span>{location}</span>
-                                <hr/>
-                            </Fragment>
-                        )}
-                        { website && (
-                            <Fragment>
-                                <LinkIcon color="primary" />
-                                <a href={website} target="_blank" rel="noopener noreferrer">
-                                    {' '}{website}
-                                </a>
-                                <hr/>
-                            </Fragment>
-                        )} */}
               <CalendarToday color="primary" />{' '}
               <span>Joined {dayjs(createdAt).format('MMM YYYYY')}</span>
             </div>

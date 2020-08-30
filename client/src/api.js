@@ -18,3 +18,7 @@ export const updateMyDetails = async function (userDetails) {
 export const uploadProfileImage = async function (image) {
   return await axios.post('/user/image', image)
 }
+
+export const postNewScream = async function (scream) {
+  return await axios.post('/scream', { body: scream })
+}
